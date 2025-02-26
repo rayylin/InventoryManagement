@@ -45,9 +45,9 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Transactions/Create
-        public IActionResult Create()
+        public IActionResult AddOrEdit()
         {
-            return View();
+            return View(new Transaction());
         }
 
         // POST: Transactions/Create
