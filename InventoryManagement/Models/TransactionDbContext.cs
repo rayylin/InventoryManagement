@@ -10,5 +10,7 @@ namespace InventoryManagement.Models
         }
 
         public DbSet<Transaction> Transactions { get; set;}
+        public DbSet<Inventory> Inventories { get; set; }
+
     }
 }
