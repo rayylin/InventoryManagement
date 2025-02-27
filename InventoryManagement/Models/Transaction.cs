@@ -7,20 +7,29 @@ namespace InventoryManagement.Models
     public class Transaction
     {
         [Key]
-        public int TransactionId { get; set; }
-        [Column(TypeName ="nvarchar(12)")]
+        [Column(TypeName = "nvarchar(50)")]
+        public string TransactionId { get; set; }
 
-        [DisplayName("Account Number")]
+        [Column(TypeName ="nvarchar(50)")]
+        [DisplayName("Product ID")]
         [Required(ErrorMessage = "Must fill! ")]
-        [MaxLength(12, ErrorMessage = "Too long")]
-        public string AccountNumber { get; set; }
+        [MaxLength(60, ErrorMessage = "Too long")]
+        public string ProductId { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
-        public string BeneficiaryName { get; set; }
-        [Column(TypeName = "nvarchar(11)")]
-        public string BankName { get; set; }
-        public string SWIFT { get; set; }
-        public int Amount { get; set; }
-        public DateTime Date { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [DisplayName("Product Name")]
+        [Required(ErrorMessage = "Must fill! ")]
+        [MaxLength(60, ErrorMessage = "Too long")]
+        public string ProductName { get; set; }
+
+        public int Quantity { get; set; }
+
+        [Column(TypeName = "nvarchar(20)")]
+        public string Comment { get; set; }
+
+        public DateTime CreateTime { get; set; }
+        public string CreateUser { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public string UpdateUser { get; set; }
     }
 }

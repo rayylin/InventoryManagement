@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,16 +9,16 @@ using InventoryManagement.Models;
 
 namespace InventoryManagement.Controllers
 {
-    public class TransactionsController : Controller
+    public class TransactionController : Controller
     {
         private readonly TransactionDbContext _context;
 
-        public TransactionsController(TransactionDbContext context)
+        public TransactionController(TransactionDbContext context)
         {
             _context = context;
         }
 
-        // GET: Transactions
+        // GET: Transaction
         public async Task<IActionResult> Index()
         {
               return _context.Transactions != null ? 
@@ -26,8 +26,8 @@ namespace InventoryManagement.Controllers
                           Problem("Entity set 'TransactionDbContext.Transactions'  is null.");
         }
 
-        // GET: Transactions/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Transaction/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Transactions == null)
             {
@@ -44,18 +44,18 @@ namespace InventoryManagement.Controllers
             return View(transaction);
         }
 
-        // GET: Transactions/Create
-        public IActionResult AddOrEdit()
+        // GET: Transaction/Create
+        public IActionResult Create()
         {
-            return View(new Transaction());
+            return View();
         }
 
-        // POST: Transactions/Create
+        // POST: Transaction/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,SWIFT,Amount,Date")] Transaction transaction)
+        public async Task<IActionResult> Create([Bind("TransactionId,ProductId,ProductName,Quantity,Comment,CreateTime,CreateUser,UpdateTime,UpdateUser")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +66,8 @@ namespace InventoryManagement.Controllers
             return View(transaction);
         }
 
-        // GET: Transactions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Transaction/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Transactions == null)
             {
@@ -82,12 +82,12 @@ namespace InventoryManagement.Controllers
             return View(transaction);
         }
 
-        // POST: Transactions/Edit/5
+        // POST: Transaction/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,SWIFT,Amount,Date")] Transaction transaction)
+        public async Task<IActionResult> Edit(string id, [Bind("TransactionId,ProductId,ProductName,Quantity,Comment,CreateTime,CreateUser,UpdateTime,UpdateUser")] Transaction transaction)
         {
             if (id != transaction.TransactionId)
             {
@@ -117,8 +117,8 @@ namespace InventoryManagement.Controllers
             return View(transaction);
         }
 
-        // GET: Transactions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Transaction/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Transactions == null)
             {
@@ -135,10 +135,10 @@ namespace InventoryManagement.Controllers
             return View(transaction);
         }
 
-        // POST: Transactions/Delete/5
+        // POST: Transaction/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Transactions == null)
             {
@@ -154,7 +154,7 @@ namespace InventoryManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TransactionExists(int id)
+        private bool TransactionExists(string id)
         {
           return (_context.Transactions?.Any(e => e.TransactionId == id)).GetValueOrDefault();
         }
