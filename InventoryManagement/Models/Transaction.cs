@@ -11,7 +11,7 @@ namespace InventoryManagement.Models
         [Column(TypeName ="nvarchar(12)")]
 
         [DisplayName("Account Number")]
-        [Required(ErrorMessage = "Must fill!")]
+        [Required(ErrorMessage = "Must fill! ")]
         [MaxLength(12, ErrorMessage = "Too long")]
         public string AccountNumber { get; set; }
 
