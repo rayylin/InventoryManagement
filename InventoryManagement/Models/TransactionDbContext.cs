@@ -10,7 +10,13 @@ namespace InventoryManagement.Models
         }
 
         public DbSet<Transaction> Transactions { get; set;}
-        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Products> Products { get; set; }
+        public DbSet<SalesPerformanceDaily> SalesPerformanceDaily { get; set; }
+        public DbSet<SalesPerformanceMonthly> SalesPerformanceMonthly { get; set; }
+        public DbSet<Store> Store { get; set; }
+        public DbSet<Suppliers> Suppliers { get; set; }
 
     }
 }
