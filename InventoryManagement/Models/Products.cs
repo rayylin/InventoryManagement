@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManagement.Models
 {
     public class Products
     {
+        [Key]
         public string? ProductId { get; set; }
         public string? ProductName { get; set; }
         public string? Category { get; set; }

@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace InventoryManagement.Models
 {
     public class Suppliers
     {
+        [Key]
         public string? SuppliersId { get; set; }
         public string? SuppliersName { get; set; }
         public string? City { get; set; }

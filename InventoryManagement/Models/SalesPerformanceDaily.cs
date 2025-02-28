@@ -6,6 +6,8 @@ namespace InventoryManagement.Models
 {
     public class SalesPerformanceDaily
     {
+        [Key]
+        public string Guid { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         [DisplayName("Product ID")]
         [Required(ErrorMessage = "Must fill! ")]

@@ -13,17 +13,19 @@ namespace InventoryManagement.Migrations
                 name: "Inventories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StoreId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    SupplierId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SafetyStock = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(2)", nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateUser = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.Id);
+                    table.PrimaryKey("PK_Inventories", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,9 +34,10 @@ namespace InventoryManagement.Migrations
                 {
                     TransactionId = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     ProductId = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    StoreId = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    UnitCost = table.Column<double>(type: "float", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false),

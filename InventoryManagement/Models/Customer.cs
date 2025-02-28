@@ -1,9 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManagement.Models
 {
     public class Customer
     {
+        [Key]
+        [Column(TypeName = "nvarchar(50)")]
         public string? CustomerId { get; set; }
         public string? CustomerName { get; set; }
         public string? City { get; set; }

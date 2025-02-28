@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManagement.Models
 {
     public class Store
     {
-        
+        [Key]
         public string? StoreId { get; set; }
         public string? StoreName { get; set; }
         public string? City { get; set; }
