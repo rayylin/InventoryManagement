@@ -25,22 +25,41 @@ namespace InventoryManagement.Controllers
             //            View(await _context.Inventory.ToListAsync()) :
             //            Problem("Entity set 'TransactionDbContext.Inventory'  is null.");
 
-            var stores = await _context.Inventory
-                                .Select(i => i.StoreId)
-                                .Distinct()
-                                .ToListAsync();
+            //var stores = await _context.Inventory
+            //                    .Select(i => i.StoreId)
+            //                    .Distinct()
+            //                    .ToListAsync();
 
-            ViewBag.StoreId = new SelectList(stores);
+            //ViewBag.StoreId = new SelectList(stores);
 
-            var inventory = _context.Inventory.AsQueryable();
+            //var inventory = _context.Inventory.AsQueryable();
+
+            //if (!string.IsNullOrEmpty(storeId))
+            //{
+            //    inventory = inventory.Where(i => i.StoreId == storeId);
+            //}
+
+            //return View(await inventory.ToListAsync());
+
+            // Retrieve distinct stores (StoreId & StoreName)
+            var stores = await _context.Store
+                                       .Select(s => new { s.StoreId, s.StoreName })
+                                       .Distinct()
+                                       .ToListAsync();
+
+            ViewBag.StoreId = new SelectList(stores, "StoreId", "StoreName");
+
+            // Retrieve inventory with StoreName included
+            var inventoryQuery = _context.Inventory
+                                         .Include(i => i.Store) // JOIN Store table
+                                         .AsQueryable();
 
             if (!string.IsNullOrEmpty(storeId))
             {
-                inventory = inventory.Where(i => i.StoreId == storeId);
+                inventoryQuery = inventoryQuery.Where(i => i.StoreId == storeId);
             }
 
-            return View(await inventory.ToListAsync());
-
+            return View(await inventoryQuery.ToListAsync());
 
         }
 

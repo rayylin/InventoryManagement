@@ -19,5 +19,6 @@ namespace InventoryManagement.Models
         public DateTime? UpdateTime { get; set; }
         public string? UpdateUser { get; set; }
 
+        public Store? Store { get; set; }
     }
 }

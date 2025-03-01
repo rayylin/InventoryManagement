@@ -18,5 +18,12 @@ namespace InventoryManagement.Models
         public DbSet<Store> Store { get; set; }
         public DbSet<Suppliers> Suppliers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Inventory>()
+                .HasOne(i => i.Store)
+                .WithMany()
+                .HasForeignKey(i => i.StoreId);
+        }
     }
 }
