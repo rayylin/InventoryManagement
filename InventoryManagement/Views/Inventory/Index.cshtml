@@ -5,10 +5,22 @@
 }
 
 <h1>Inventory</h1>
+<div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</div>
+<br />
+<div>
+<form asp-action="Index" method="get">
+        <label for="storeId">Filter by Store:</label>
+        <select name="storeId" asp-items="ViewBag.StoreId">
+            <option value="">All Stores</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>

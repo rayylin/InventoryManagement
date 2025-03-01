@@ -19,11 +19,29 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Inventory
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string storeId = "")
         {
-              return _context.Inventory != null ? 
-                          View(await _context.Inventory.ToListAsync()) :
-                          Problem("Entity set 'TransactionDbContext.Inventory'  is null.");
+            //return _context.Inventory != null ? 
+            //            View(await _context.Inventory.ToListAsync()) :
+            //            Problem("Entity set 'TransactionDbContext.Inventory'  is null.");
+
+            var stores = await _context.Inventory
+                                .Select(i => i.StoreId)
+                                .Distinct()
+                                .ToListAsync();
+
+            ViewBag.StoreId = new SelectList(stores);
+
+            var inventory = _context.Inventory.AsQueryable();
+
+            if (!string.IsNullOrEmpty(storeId))
+            {
+                inventory = inventory.Where(i => i.StoreId == storeId);
+            }
+
+            return View(await inventory.ToListAsync());
+
+
         }
 
         // GET: Inventory/Details/5
