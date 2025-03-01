@@ -20,5 +20,6 @@ namespace InventoryManagement.Models
         public string? UpdateUser { get; set; }
 
         public Store? Store { get; set; }
+        public Products? Products { get; set; }
     }
 }

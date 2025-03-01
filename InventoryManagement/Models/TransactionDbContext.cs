@@ -20,10 +20,15 @@ namespace InventoryManagement.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Inventory>() // Configuring the Inventory entity
+                .HasOne(i => i.Store)        // Inventory has *one* related Store
+                .WithMany()                  // A Store can have *many* Inventory records
+                .HasForeignKey(i => i.StoreId); // The foreign key is StoreId in Inventory
+
             modelBuilder.Entity<Inventory>()
-                .HasOne(i => i.Store)
+                .HasOne(i => i.Products)  
                 .WithMany()
-                .HasForeignKey(i => i.StoreId);
+                .HasForeignKey(i => i.ProductId);
         }
     }
 }

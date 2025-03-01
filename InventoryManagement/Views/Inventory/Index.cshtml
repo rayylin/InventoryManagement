@@ -54,10 +54,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
+                @* @Html.DisplayFor(modelItem => item.ProductId) *@
+                <td>@item.Product?.ProductName</td>
             </td>
             <td>
-                    @item.Store?.StoreName
+                @item.Store?.StoreName
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)

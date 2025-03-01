@@ -52,6 +52,7 @@ namespace InventoryManagement.Controllers
             // Retrieve inventory with StoreName included
             var inventoryQuery = _context.Inventory
                                          .Include(i => i.Store) // JOIN Store table
+                                         .Include(i => i.Products) // Join Product table
                                          .AsQueryable();
 
             if (!string.IsNullOrEmpty(storeId))
