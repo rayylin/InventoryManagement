@@ -18,6 +18,8 @@ namespace InventoryManagement.Models
         public DbSet<Store> Store { get; set; }
         public DbSet<Suppliers> Suppliers { get; set; }
 
+        public DbSet<CustomerPurchase> CustomerPurchase { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Inventory>() // Configuring the Inventory entity
