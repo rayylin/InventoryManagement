@@ -12,6 +12,11 @@
     <select name="storeId" asp-items="ViewBag.StoreId">
         <option value="">All Stores</option>
     </select>
+    <br />
+    <label for="productId">Filter by Product:</label>
+    <select name="productId" asp-items="ViewBag.ProductId">
+        <option value="">All Products</option>
+    </select>
     <button type="submit">Filter</button>
 </form>
 

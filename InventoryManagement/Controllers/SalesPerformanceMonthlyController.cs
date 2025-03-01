@@ -22,7 +22,7 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: SalesPerformanceMonthly
-        public async Task<IActionResult> Index(string sortColumn, string sortDirection, string storeId)
+        public async Task<IActionResult> Index(string sortColumn="", string sortDirection = "", string storeId = "", string productId = "")
         {
             //return _context.SalesPerformanceMonthly != null ? 
             //            View(await _context.SalesPerformanceMonthly.ToListAsync()) :
@@ -40,11 +40,18 @@ namespace InventoryManagement.Controllers
             ViewData["YearSortParam"] = sortColumn == "Year" && sortDirection == "asc" ? "desc" : "asc";
 
             // Fetch Store List for Filtering Dropdown
-            var stores = await _context.Inventory
+            var stores = await _context.CustomerPurchase
                 .Select(i => i.StoreId)
                 .Distinct()
                 .ToListAsync();
+
+            var products = await _context.CustomerPurchase
+                .Select(i => i.ProductId)
+                .Distinct()
+                .ToListAsync();
+
             ViewBag.StoreId = new SelectList(stores);
+            ViewBag.ProductId = new SelectList(products);
 
             // Query Sales Data
             var salesData = _context.SalesPerformanceMonthly.AsQueryable();
@@ -52,6 +59,11 @@ namespace InventoryManagement.Controllers
             if (!string.IsNullOrEmpty(storeId))
             {
                 salesData = salesData.Where(s => s.StoreId == storeId);
+            }
+
+            if (!string.IsNullOrEmpty(productId))
+            {
+                salesData = salesData.Where(s => s.ProductId == productId);
             }
 
             salesData = sortDirection == "asc"
@@ -65,8 +77,6 @@ namespace InventoryManagement.Controllers
             {
                 inventoryData = inventoryData.Where(i => i.StoreId == storeId);
             }
-
-
 
 
             var viewModel = new SalesInventoryViewModel
