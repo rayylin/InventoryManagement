@@ -4,6 +4,11 @@ using System.ComponentModel;
 
 namespace InventoryManagement.Models
 {
+    public class SalesInventoryViewModel
+    {
+        public List<SalesPerformanceMonthly> SalesData { get; set; }
+        public List<Inventory> InventoryData { get; set; }
+    }
     public class SalesPerformanceMonthly
     {
         [Key]
