@@ -11,15 +11,17 @@
     </p>
 </div>
 <div>
-<form asp-action="Index" method="get">
+    <form asp-action="Index" method="get">
         <label for="storeId">Filter by Store:</label>
         <select name="storeId" asp-items="ViewBag.StoreId">
             <option value="">All Stores</option>
         </select>
 
-        <label for="storeId">Filter by Store:</label>
-        <select name="storeId" asp-items="ViewBag.StoreId">
-            <option value="">All Stores</option>
+        <label for="needReorder">Filter by Need Reorder:</label>
+        <select name="needReorder">
+            <option value="">All</option>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
         </select>
         <button type="submit">Filter</button>
     </form>

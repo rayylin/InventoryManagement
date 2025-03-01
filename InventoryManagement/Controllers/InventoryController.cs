@@ -19,7 +19,7 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Inventory
-        public async Task<IActionResult> Index(string storeId = "")
+        public async Task<IActionResult> Index(string storeId = "", string needReorder = "")
         {
             //return _context.Inventory != null ? 
             //            View(await _context.Inventory.ToListAsync()) :
@@ -55,9 +55,16 @@ namespace InventoryManagement.Controllers
                                          .Include(i => i.Products) // Join Product table
                                          .AsQueryable();
 
+            // Filter by StoreId if provided
             if (!string.IsNullOrEmpty(storeId))
             {
                 inventoryQuery = inventoryQuery.Where(i => i.StoreId == storeId);
+            }
+
+            // Filter by NeedReorder if provided
+            if (!string.IsNullOrEmpty(needReorder))
+            {
+                inventoryQuery = inventoryQuery.Where(i => (i.Quantity < i.SafetyStock ? "Y" : "N") == needReorder);
             }
 
             return View(await inventoryQuery.ToListAsync());
