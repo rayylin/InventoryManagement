@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagement.Models;
+using Microsoft.Data.SqlClient;
 
 namespace InventoryManagement.Controllers
 {
@@ -19,11 +20,34 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: SalesPerformanceMonthly
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortColumn, string sortDirection)
         {
-              return _context.SalesPerformanceMonthly != null ? 
-                          View(await _context.SalesPerformanceMonthly.ToListAsync()) :
-                          Problem("Entity set 'TransactionDbContext.SalesPerformanceMonthly'  is null.");
+            //return _context.SalesPerformanceMonthly != null ? 
+            //            View(await _context.SalesPerformanceMonthly.ToListAsync()) :
+            //            Problem("Entity set 'TransactionDbContext.SalesPerformanceMonthly'  is null.");
+
+            ViewData["CurrentSortColumn"] = sortColumn;
+            ViewData["CurrentSortDirection"] = sortDirection;
+
+            // Define Sorting Parameters for Each Column
+            ViewData["PidSortParam"] = sortColumn == "ProductId" && sortDirection == "asc" ? "desc" : "asc";
+            ViewData["StoreIdSortParam"] = sortColumn == "StoreId" && sortDirection == "asc" ? "desc" : "asc";
+            ViewData["MonthSortParam"] = sortColumn == "Month" && sortDirection == "asc" ? "desc" : "asc";
+            ViewData["YearSortParam"] = sortColumn == "Year" && sortDirection == "asc" ? "desc" : "asc";
+            // Query Data
+            var salesData = _context.SalesPerformanceMonthly.AsQueryable();
+
+            // Apply Dynamic Sorting
+            if (!string.IsNullOrEmpty(sortColumn))
+            {
+                bool isAscending = sortDirection == "asc";
+
+                salesData = isAscending
+                    ? salesData.OrderBy(e => EF.Property<object>(e, sortColumn))
+                    : salesData.OrderByDescending(e => EF.Property<object>(e, sortColumn));
+            }
+
+            return View(await salesData.ToListAsync());
         }
 
         // GET: SalesPerformanceMonthly/Details/5

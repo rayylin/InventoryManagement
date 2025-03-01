@@ -21,7 +21,7 @@ namespace InventoryManagement.Models
         public string StoreId { get; set; }
 
         public int Quantity { get; set; }
-        [DisplayName("Unit Cost ($)")]
+        [DisplayName("Month")]
         public string Month { get; set; }
         public string Year { get; set; }
 
