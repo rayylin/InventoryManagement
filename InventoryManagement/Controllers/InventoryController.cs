@@ -45,7 +45,7 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Inventory/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Inventory == null)
             {
@@ -105,7 +105,7 @@ namespace InventoryManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,StoreId,Quantity,SafetyStock,Status,Comment,UpdateTime,UpdateUser")] Inventory inventory)
+        public async Task<IActionResult> Edit(string id, [Bind("ProductId,StoreId,Quantity,SafetyStock,Status,Comment,UpdateTime,UpdateUser")] Inventory inventory)
         {
             if (id != inventory.ProductId)
             {
@@ -136,7 +136,7 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Inventory/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null || _context.Inventory == null)
             {
@@ -172,7 +172,7 @@ namespace InventoryManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InventoryExists(int id)
+        private bool InventoryExists(string id)
         {
           return (_context.Inventory?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
