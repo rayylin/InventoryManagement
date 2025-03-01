@@ -8,14 +8,15 @@
 
 <!-- Filter Form -->
 <form asp-action="Index" method="get">
-    <label for="storeId">Filter by Store:</label>
-    <select name="storeId" asp-items="ViewBag.StoreId">
-        <option value="">All Stores</option>
-    </select>
-    <br />
+
     <label for="productId">Filter by Product:</label>
     <select name="productId" asp-items="ViewBag.ProductId">
         <option value="">All Products</option>
+    </select>
+    <br />
+    <label for="storeId">Filter by Store:</label>
+    <select name="storeId" asp-items="ViewBag.StoreId">
+        <option value="">All Stores</option>
     </select>
     <button type="submit">Filter</button>
 </form>
@@ -70,7 +71,7 @@
 </table>
 
 <!-- Inventory Table -->
-<h1>Inventory Data</h1>
+@* <h1>Inventory Data</h1>
 <table class="table">
     <thead>
         <tr>
@@ -89,4 +90,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@

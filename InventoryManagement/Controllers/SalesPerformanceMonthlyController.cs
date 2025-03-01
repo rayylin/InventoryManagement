@@ -28,7 +28,7 @@ namespace InventoryManagement.Controllers
             //            View(await _context.SalesPerformanceMonthly.ToListAsync()) :
             //            Problem("Entity set 'TransactionDbContext.SalesPerformanceMonthly'  is null.");
 
-            if (string.IsNullOrEmpty(sortColumn)) sortColumn = "ProductId";
+            if (string.IsNullOrEmpty(sortColumn)) sortColumn = "Month";
             if (string.IsNullOrEmpty(sortDirection)) sortDirection = "asc";
 
             ViewData["CurrentSortColumn"] = sortColumn;
