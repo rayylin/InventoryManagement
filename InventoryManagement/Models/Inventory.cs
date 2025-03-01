@@ -21,5 +21,9 @@ namespace InventoryManagement.Models
 
         public Store? Store { get; set; }
         public Products? Products { get; set; }
+
+        // Computed Property: NeedReorder
+        public string NeedReorder => Quantity < SafetyStock ? "Y" : "N";
+
     }
 }

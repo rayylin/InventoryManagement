@@ -16,6 +16,11 @@
         <select name="storeId" asp-items="ViewBag.StoreId">
             <option value="">All Stores</option>
         </select>
+
+        <label for="storeId">Filter by Store:</label>
+        <select name="storeId" asp-items="ViewBag.StoreId">
+            <option value="">All Stores</option>
+        </select>
         <button type="submit">Filter</button>
     </form>
 </div>
@@ -27,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.ProductId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StoreId)
+                Store Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
@@ -46,6 +51,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UpdateUser)
+            </th>
+            <th>
+                Need Reorder
             </th>
             <th></th>
         </tr>
@@ -77,6 +85,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdateUser)
+            </td>
+            <td>
+                @item.NeedReorder
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
