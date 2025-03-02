@@ -21,7 +21,7 @@ namespace InventoryManagement.Models
         public string StoreId { get; set; }
 
         public int Quantity { get; set; }
-        [DisplayName("Unit Cost ($)")]
+        [DisplayName("Date")]
         public DateTime Date { get; set; }
 
         [Column(TypeName = "nvarchar(max)")]
