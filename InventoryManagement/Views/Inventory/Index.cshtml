@@ -6,9 +6,9 @@
 
 <h1>Inventory</h1>
 <div>
-    <p>
+@*     <p>
         <a asp-action="Create">Create New</a>
-    </p>
+    </p> *@
 </div>
 <div>
     <form asp-action="Index" method="get">
@@ -16,7 +16,7 @@
         <select name="storeId" asp-items="ViewBag.StoreId">
             <option value="">All Stores</option>
         </select>
-
+        <br />
         <label for="needReorder">Filter by Need Reorder:</label>
         <select name="needReorder">
             <option value="">All</option>
