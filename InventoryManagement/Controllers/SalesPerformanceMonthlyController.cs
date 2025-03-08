@@ -53,6 +53,14 @@ namespace InventoryManagement.Controllers
             ViewBag.StoreId = new SelectList(stores);
             ViewBag.ProductId = new SelectList(products);
 
+
+
+            var SalesPerformanceMonthly = _context.SalesPerformanceMonthly
+                             .Include(i => i.Store) // JOIN Store table
+                             .Include(i => i.Products) // Join Product table
+                             .AsQueryable();
+
+
             // Query Sales Data
             var salesData = _context.SalesPerformanceMonthly.AsQueryable();
 
