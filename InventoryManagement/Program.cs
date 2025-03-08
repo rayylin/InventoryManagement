@@ -58,21 +58,6 @@ app.MapHangfireDashboard(); // Route for Hangfire UI
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
     service => service.ExecuteStoredProcedure(),
-    "*/5 * * * * *"); // Run every 5 seconds
+    "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 app.Run();
-
-
-//void ExecuteStoredProcedure()
-//{
-//    var connectionString = "Your_Connection_String";
-//    using (var connection = new SqlConnection(connectionString))
-//    {
-//        using (var command = new SqlCommand("[dbo].[SummarizeCusPurchaseDaily]", connection))
-//        {
-//            command.CommandType = CommandType.StoredProcedure;
-//            connection.Open();
-//            command.ExecuteNonQuery();
-//        }
-//    }
-//}

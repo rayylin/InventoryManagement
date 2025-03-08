@@ -1,0 +1,45 @@
+﻿┌─────── Second (0–59)
+│ ┌────── Minute (0–59)
+│ │ ┌───── Hour (0–23)
+│ │ │ ┌──── Day of Month (1–31)
+│ │ │ │ ┌── Month (1–12)
+│ │ │ │ │ ┌─ Day of Week (0–6) (Sunday to Saturday)
+│ │ │ │ │ │
+*/5 * * * * *
+
+This means "every 5 seconds, every minute, every hour, every day, every month, every weekday."
+
+If you're using a system like Linux cron, which only has five fields (starting from minutes), then you would need an alternative approach since standard cron jobs run at a minimum of once per minute.
+
+n a standard cron (which uses 5 fields, e.g., in Linux), you can write:
+
+markdown
+Copy
+Edit
+* * * * *
+This means every minute at every hour, every day, every month, and every weekday.
+
+What does / mean in a cron expression?
+The / operator in a cron expression is called "step values" and is used to define intervals.
+
+For example:
+
+*/5 * * * * → Every 5 minutes
+0 */2 * * * → Every 2 hours, at minute 0
+*/10 9-17 * * * → Every 10 minutes between 9 AM and 5 PM
+It works by specifying increments from the starting value.
+
+For instance, in */5:
+
+The * means "every possible value" (e.g., every minute).
+The /5 means "every 5th value," so it runs at 0, 5, 10, 15, 20...
+
+
+
+
+
+
+
+
+
+
