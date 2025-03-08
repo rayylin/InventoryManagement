@@ -26,6 +26,9 @@ builder.Services.AddHangfire(config =>
     config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DevConnection")));
 builder.Services.AddHangfireServer();
 
+builder.Services.AddSingleton<DatabaseService>(provider =>
+    new DatabaseService(builder.Configuration.GetConnectionString("DevConnection")));
+
 var app = builder.Build();
     
 // Configure the HTTP request pipeline.
@@ -55,7 +58,7 @@ app.MapHangfireDashboard(); // Route for Hangfire UI
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
     service => service.ExecuteStoredProcedure(),
-    "*/5 * * * * *");
+    "*/5 * * * * *"); // Run every 5 seconds
 
 app.Run();
 

@@ -7,17 +7,16 @@ namespace InventoryManagement.Services
 {
     public  class DatabaseService
     {
-        public  readonly string _connectionString;
+        private readonly string _connectionString;
 
-        public  DatabaseService(string connectionString)
+        public DatabaseService(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public  void ExecuteStoredProcedure()
+        public void ExecuteStoredProcedure()
         {
-            var connectionString = "Server=RAY\\SQLEXPRESS;Database=InvMgnt;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True";
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_connectionString)) // Use injected connection string
             {
                 using (var command = new SqlCommand("[dbo].[SummarizeCusPurchaseDaily]", connection))
                 {
