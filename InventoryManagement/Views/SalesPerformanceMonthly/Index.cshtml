@@ -26,7 +26,13 @@
     <thead>
         <tr>
             <th>
+                Product Name
+            </th>
+            <th>
                 <a asp-action="Index" asp-route-sortColumn="ProductId" asp-route-sortDirection="@ViewData["PidSortParam"]">ProductId</a>
+            </th>
+            <th>
+                Store Name
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortColumn="StoreId" asp-route-sortDirection="@ViewData["StoreIdSortParam"]">StoreId</a>
@@ -50,7 +56,9 @@
         @foreach (var item in Model.SalesData)
         {
             <tr>
+                <td>@item.Products?.ProductName</td>
                 <td>@item.ProductId</td>
+                <td>@item.Store?.StoreName</td>
                 <td>@item.StoreId</td>
                 <td>@item.Month</td>
                 <td>@item.Year</td>

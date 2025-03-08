@@ -31,6 +31,17 @@ namespace InventoryManagement.Models
                 .HasOne(i => i.Products)  
                 .WithMany()
                 .HasForeignKey(i => i.ProductId);
+
+            modelBuilder.Entity<SalesPerformanceMonthly>() // Configuring the Inventory entity
+                .HasOne(i => i.Store)        // Inventory has *one* related Store
+                .WithMany()                  // A Store can have *many* Inventory records
+                .HasForeignKey(i => i.StoreId); // The foreign key is StoreId in Inventory
+
+            modelBuilder.Entity<SalesPerformanceMonthly>()
+                .HasOne(i => i.Products)
+                .WithMany()
+                .HasForeignKey(i => i.ProductId);
+
         }
     }
 }
