@@ -57,7 +57,7 @@ app.MapHangfireDashboard(); // Route for Hangfire UI
 
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
-    service => service.ExecuteStoredProcedure(),
+    service => service.ExecuteStoredProcedure("[dbo].[SummarizeCusPurchaseDaily]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 app.Run();

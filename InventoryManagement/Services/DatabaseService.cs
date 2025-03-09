@@ -14,11 +14,11 @@ namespace InventoryManagement.Services
             _connectionString = connectionString;
         }
 
-        public void ExecuteStoredProcedure()
+        public void ExecuteStoredProcedure(string query = "")
         {
             using (var connection = new SqlConnection(_connectionString)) // Use injected connection string
             {
-                using (var command = new SqlCommand("[dbo].[SummarizeCusPurchaseDaily]", connection))
+                using (var command = new SqlCommand(query, connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
