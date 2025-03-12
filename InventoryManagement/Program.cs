@@ -62,6 +62,6 @@ RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
 
 RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SimulateNewPurchase]"),
-    "*/30 * * * * *"); // Run every 5 seconds by using Cron Expression
+    "*/25 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 app.Run();
