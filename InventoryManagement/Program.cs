@@ -10,6 +10,11 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Data;
 using InventoryManagement.Services;
+using InventoryManagement.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +33,10 @@ builder.Services.AddHangfireServer();
 
 builder.Services.AddSingleton<DatabaseService>(provider =>
     new DatabaseService(builder.Configuration.GetConnectionString("DevConnection")));
+
+builder.Services.AddSignalR();
+builder.Services.AddScoped<SignalrServices>();
+
 
 var app = builder.Build();
     
@@ -55,6 +64,15 @@ app.UseHangfireDashboard(); // Enable Hangfire Dashboard
 app.MapControllers();
 app.MapHangfireDashboard(); // Route for Hangfire UI
 
+
+// Map SignalR Hub
+app.MapHub<MyHub>("/myhub");
+
+using var scope = app.Services.CreateScope();
+var hubContext = scope.ServiceProvider.GetRequiredService<IHubContext<MyHub>>();
+
+
+
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SummarizeCusPurchaseDaily]"),
@@ -63,5 +81,20 @@ RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
 RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SimulateNewPurchase]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
+
+
+
+RecurringJob.AddOrUpdate<SignalrServices>(
+    "RefreshPurchase",
+    s => s.RefreshPage(),
+    "*/5 * * * * *" // Runs every 5 seconds
+);
+
+
+
+
+
+
+
 
 app.Run();
