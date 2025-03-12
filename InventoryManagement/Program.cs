@@ -58,10 +58,10 @@ app.MapHangfireDashboard(); // Route for Hangfire UI
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SummarizeCusPurchaseDaily]"),
-    "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
+    "*/55 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SimulateNewPurchase]"),
-    "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
+    "*/30 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 app.Run();
