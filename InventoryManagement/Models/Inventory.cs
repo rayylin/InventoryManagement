@@ -19,6 +19,7 @@ namespace InventoryManagement.Models
         public DateTime? UpdateTime { get; set; }
         public string? UpdateUser { get; set; }
         public string? InventoryStrategy { get; set; }
+        public int InTransit { get; set; }
 
         public Store? Store { get; set; }
         public Products? Products { get; set; }
