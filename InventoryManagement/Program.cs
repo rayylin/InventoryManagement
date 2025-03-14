@@ -75,14 +75,14 @@ var hubContext = scope.ServiceProvider.GetRequiredService<IHubContext<MyHub>>();
 
 // Start the recurring job
 RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
-    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SummarizeCusPurchaseDaily]"),
+    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Summarize_CusPurchaseDaily]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
-    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SimulateNewPurchase]"),
+    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Simulate_NewPurchase]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
-RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
+RecurringJob.AddOrUpdate<DatabaseService>("Inventory_OrderToTransit",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Inventory_OrderToTransit_Update]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
