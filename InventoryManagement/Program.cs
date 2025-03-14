@@ -78,8 +78,8 @@ RecurringJob.AddOrUpdate<DatabaseService>("summarize-daily",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Summarize_CusPurchaseDaily]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
-RecurringJob.AddOrUpdate<DatabaseService>("simulateNewPurchase",
-    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Simulate_NewPurchase]"),
+RecurringJob.AddOrUpdate<DatabaseService>("simulate_NewPurchase",
+    service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[SimulateNewPurchase]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 RecurringJob.AddOrUpdate<DatabaseService>("Inventory_OrderToTransit",
