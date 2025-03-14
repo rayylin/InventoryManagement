@@ -67,6 +67,8 @@ namespace InventoryManagement.Controllers
                 inventoryQuery = inventoryQuery.Where(i => (i.Quantity < i.SafetyStock ? "Y" : "N") == needReorder);
             }
 
+            inventoryQuery.OrderBy(e => EF.Property<object>(e, "UpdateTime"));
+
             return View(await inventoryQuery.ToListAsync());
 
         }
