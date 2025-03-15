@@ -20,9 +20,16 @@ namespace InventoryManagement.Services
             {
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    try
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    } 
+                    catch (Exception ex) 
+                    {                     
+                        Console.WriteLine(ex.ToString());
+                    }
                 }
             }
         }

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Drawing.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
