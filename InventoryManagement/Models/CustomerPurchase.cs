@@ -33,5 +33,6 @@ namespace InventoryManagement.Models
         public string CreateUser { get; set; }
         public DateTime UpdateTime { get; set; }
         public string UpdateUser { get; set; }
+        public string? InvStatus { get; set; }
     }
 }

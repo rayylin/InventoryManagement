@@ -91,6 +91,9 @@ RecurringJob.AddOrUpdate<DatabaseService>("Inventory_TransitToDeliver",
     service => service.ExecuteStoredProcedure("[InvMgnt].[dbo].[Inventory_TransitToDeliver_Update]"),
     "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
+RecurringJob.AddOrUpdate<DatabaseService>("Inventory_QuantityMinusPurchase_Update",
+    service => service.ExecuteStoredProcedure("[Inventory_QuantityMinusPurchase_Update]\r\n"),
+    "*/5 * * * * *"); // Run every 5 seconds by using Cron Expression
 
 RecurringJob.AddOrUpdate<SignalrServices>(
     "RefreshPurchase",
