@@ -11,7 +11,6 @@
     
 </head>
 <body>
-    <h1>Page will refresh when the server sends a signal.</h1>
     <h1>Customer Purchase</h1>
     <p>
         <a asp-action="Create">Create New</a>
@@ -35,7 +34,7 @@
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
                 <th>
-                    InvStatus
+                    @Html.DisplayNameFor(model => model.InvStatus)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreateTime)
@@ -108,7 +107,7 @@
         connection.start().catch(err => console.error(err.toString()));
     </script>
 </body>
-<h1>Customer Purchase</h1>
+@* <h1>Customer Purchase</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -184,5 +183,5 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@
 </html>
