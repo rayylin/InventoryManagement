@@ -6,9 +6,7 @@
 <html>
 <head>
     <title>SignalR Page Refresh</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>    
 </head>
 <body>
     <h1>Customer Purchase</h1>
@@ -48,7 +46,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.UpdateUser)
                 </th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -95,6 +93,21 @@
         </tbody>
     </table>
 
+    <!-- Pagination Buttons -->
+    <div>
+        @if (ViewBag.PageNumber > 1)
+        {
+            <a asp-action="Index" asp-route-pageNumber="@(ViewBag.PageNumber - 1)" asp-route-pageSize="@ViewBag.PageSize">Previous</a>
+        }
+
+        <span>Page @ViewBag.PageNumber</span>
+
+        @if (ViewBag.HasNextPage)
+        {
+            <a asp-action="Index" asp-route-pageNumber="@(ViewBag.PageNumber + 1)" asp-route-pageSize="@ViewBag.PageSize">Next</a>
+        }
+    </div>
+
     <script>
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/myhub")
@@ -107,6 +120,7 @@
         connection.start().catch(err => console.error(err.toString()));
     </script>
 </body>
+</html>
 @* <h1>Customer Purchase</h1>
 <p>
     <a asp-action="Create">Create New</a>
@@ -184,4 +198,3 @@
         }
     </tbody>
 </table> *@
-</html>

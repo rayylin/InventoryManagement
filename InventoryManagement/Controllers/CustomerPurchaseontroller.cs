@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagement.Models;
+using System.Drawing.Printing;
 
 namespace InventoryManagement.Controllers
 {
@@ -19,11 +20,28 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: CustomerPurchaseontroller
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 20)
         {
-              return _context.CustomerPurchase != null ? 
-                          View(await _context.CustomerPurchase.ToListAsync()) :
-                          Problem("Entity set 'TransactionDbContext.CustomerPurchase'  is null.");
+            //return _context.CustomerPurchase != null ? 
+            //            View(await _context.CustomerPurchase.ToListAsync()) :
+            //            Problem("Entity set 'TransactionDbContext.CustomerPurchase'  is null.");
+
+            if (_context.CustomerPurchase == null)
+            {
+                return Problem("Entity set 'TransactionDbContext.CustomerPurchase' is null.");
+            }
+
+            var customerPurchases = await _context.CustomerPurchase
+                .OrderByDescending(c => c.CreateTime) // Order by latest created records
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.HasNextPage = _context.CustomerPurchase.Count() > pageNumber * pageSize;
+
+            return View(customerPurchases);
         }
 
         // GET: CustomerPurchaseontroller/Details/5
