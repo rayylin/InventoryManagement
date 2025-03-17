@@ -4,4 +4,5 @@ In this project, we are going to build a inventory management system with .net c
 
 ![image](https://github.com/user-attachments/assets/69448666-7380-4342-beb2-1f9db8c36252)
 
-![image](https://github.com/user-attachments/assets/1847e9fa-391b-4570-be3a-db08d1c71ad5)
+![image](https://github.com/user-attachments/assets/b87dad0f-69f9-4c74-920a-621dc35acc17)
+
