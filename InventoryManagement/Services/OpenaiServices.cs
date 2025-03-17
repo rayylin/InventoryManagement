@@ -58,7 +58,8 @@ namespace InventoryManagement.Services
         {
             DatabaseService dbHelper = new DatabaseService("Server=RAY\\SQLEXPRESS;Database=InvMgnt;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True");
 
-            string query = $@"SELECT B.[StoreName]
+            string query = $@"SELECT format(A.[CreateTime], 'MM/dd/yyyy')
+                                    ,B.[StoreName]
 	                                ,C.[ProductName]
                                     ,SUM([quantity]) as 'quantity'
                                 FROM [InvMgnt].[dbo].[CustomerPurchase] A
@@ -67,8 +68,8 @@ namespace InventoryManagement.Services
                                INNER JOIN [InvMgnt].[dbo].[Products] C
                                   ON A.[productid] = C.[productid]
                                where A.[StoreId] in ('Sid01', 'Sid02', 'Sid03')
-                                 and format([CreateTime], 'MM/dd/yyyy') = format(getdate(), 'MM/dd/yyyy')
-                               GROUP BY B.[StoreName], C.[ProductName]";
+                               --  and format([CreateTime], 'MM/dd/yyyy') = format(getdate(), 'MM/dd/yyyy')
+                               GROUP BY format(A.[CreateTime], 'MM/dd/yyyy'), B.[StoreName], C.[ProductName]";
 
             DataTable dt = dbHelper.connectDb(query);
 
