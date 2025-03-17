@@ -33,6 +33,27 @@ namespace InventoryManagement.Services
                 }
             }
         }
+
+        public DataTable connectDb(string s)
+        {
+           
+            using(var connection = new SqlConnection(_connectionString)) // Use injected connection string
+            {
+                string queryStatement = s;
+                using (SqlCommand _cmd = new SqlCommand(queryStatement, connection))
+                {
+                    DataTable tmpTable = new DataTable("Top5Customers");
+
+                    SqlDataAdapter _dap = new SqlDataAdapter(_cmd);
+
+                    connection.Open();
+                    _dap.Fill(tmpTable);
+                    connection.Close();
+
+                    return tmpTable;
+                }
+            }
+        }
     }
 
 

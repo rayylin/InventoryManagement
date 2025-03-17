@@ -35,8 +35,17 @@ builder.Services.AddHangfireServer();
 builder.Services.AddSingleton<DatabaseService>(provider =>
     new DatabaseService(builder.Configuration.GetConnectionString("DevConnection")));
 
+
+
+
 builder.Services.AddSignalR();
 builder.Services.AddScoped<SignalrServices>();
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<OpenaiServices>();
+builder.Services.AddSingleton<OpenaiServices>();
 
 
 var app = builder.Build();
@@ -101,10 +110,17 @@ RecurringJob.AddOrUpdate<SignalrServices>(
     "*/5 * * * * *" // Runs every 5 seconds
 );
 
+//RecurringJob.AddOrUpdate<OpenaiServices>(
+//    "RetrievePriceFromInternet",
+//    s => s.GetAnswerAsync ("Get the price of \"Lactaid 2% Reduced Fat Milk\" from Search Query for me", "\"You are a helpful assistant to get the price of a product from the Internet\""),
+//    "*/5 * * * * *" // Runs every 5 seconds
+//);
 
-
-
-
+//RecurringJob.AddOrUpdate<OpenaiServices>(
+//    "RetrievePriceFromInternet",
+//    s => s.summaryDaily("store 1, 2, 3"),
+//    "*/5 * * * * *" // Runs every 5 seconds
+//);
 
 
 
