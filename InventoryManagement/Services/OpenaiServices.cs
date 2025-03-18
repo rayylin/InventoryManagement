@@ -73,13 +73,13 @@ namespace InventoryManagement.Services
 
             DataTable dt = dbHelper.connectDb(query);
 
-            string summarySales = "{'store Name', 'product Name', 'Quantity': [";
+            string summarySales = "{'Date','store Name', 'product Name', 'Quantity': [";
 
             if (dt?.Rows?.Count > 0 ) 
             { 
                 for ( int i = 0; i < dt?.Rows?.Count; i++ )
                 { 
-                    summarySales +=$@"({dt.Rows[i][0]},{dt.Rows[i][1]},{dt.Rows[i][2]})," ;
+                    summarySales +=$@"({dt.Rows[i][0]},{dt.Rows[i][1]},{dt.Rows[i][2]},{dt.Rows[i][3]})," ;
                 }
             
             }
