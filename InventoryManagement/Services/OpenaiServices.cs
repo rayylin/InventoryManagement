@@ -68,8 +68,7 @@ namespace InventoryManagement.Services
                                   ON A.[StoreId] = B.[StoreId]
                                INNER JOIN [InvMgnt].[dbo].[Products] C
                                   ON A.[productid] = C.[productid]
-                               where A.[StoreId] in ('Sid01', 'Sid02', 'Sid03')
-                               --  and format([CreateTime], 'MM/dd/yyyy') = format(getdate(), 'MM/dd/yyyy')
+                               where A.[StoreId] in ('Sid01', 'Sid02', 'Sid03')                               
                                GROUP BY format(A.[CreateTime], 'MM/dd/yyyy'), B.[StoreName], C.[ProductName]";
 
             DataTable dt = dbHelper.connectDb(query);
