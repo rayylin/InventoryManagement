@@ -5,8 +5,7 @@
 
 
 # Ignore appsettings containing secrets
-appsettings.Development.json
-appsettings.Local.json
+appsettings.json
 appsettings.*.json    # Optional, ignores all environment-specific settings files
 
 # Ignore user secrets (for local development)
