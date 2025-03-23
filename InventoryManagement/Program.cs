@@ -116,11 +116,11 @@ RecurringJob.AddOrUpdate<SignalrServices>(
 //    "*/5 * * * * *" // Runs every 5 seconds
 //);
 
-RecurringJob.AddOrUpdate<OpenaiServices>(
-    "RetrievePriceFromInternet",
-    s => s.summaryDaily("store 1, 2, 3"),
-    "*/5 * * * * *" // Runs every 5 seconds
-);
+//RecurringJob.AddOrUpdate<OpenaiServices>(
+//    "RetrievePriceFromInternet",
+//    s => s.summaryDaily("store 1, 2, 3"),
+//    "*/5 * * * * *" // Runs every 5 seconds
+//);
 
 
 

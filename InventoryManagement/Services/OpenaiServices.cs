@@ -11,7 +11,6 @@ namespace InventoryManagement.Services
     public class OpenaiServices
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
         private readonly string _model;
         private readonly IConfiguration _configuration;
 
@@ -19,7 +18,6 @@ namespace InventoryManagement.Services
         public OpenaiServices(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _apiKey = "";
             _model = "gpt-3.5-turbo";
             _configuration = configuration;
         }
@@ -44,8 +42,10 @@ namespace InventoryManagement.Services
             var requestJson = JsonSerializer.Serialize(requestBody);
             var requestContent = new StringContent(requestJson, Encoding.UTF8, "application/json");
 
+            string apiKey = _configuration["openaiKey"]; ;
+
             _httpClient.DefaultRequestHeaders.Clear();
-            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
 
             var response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", requestContent);
             var responseJson = await response.Content.ReadAsStringAsync();
