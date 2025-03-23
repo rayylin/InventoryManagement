@@ -13,13 +13,15 @@ namespace InventoryManagement.Services
         private readonly HttpClient _httpClient;
         private readonly string _apiKey;
         private readonly string _model;
+        private readonly IConfiguration _configuration;
+
 
         public OpenaiServices(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _apiKey = "";
             _model = "gpt-3.5-turbo";
-            
+            _configuration = configuration;
         }
 
         public async Task<string> GetAnswerAsync(string question, string prompt = "You are a helpful assistant to get the price of a product from the Internet")
@@ -57,7 +59,9 @@ namespace InventoryManagement.Services
 
         public async Task<string> summaryDaily(string question)
         {
-            DatabaseService dbHelper = new DatabaseService("Server=RAY\\SQLEXPRESS;Database=InvMgnt;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True");
+            string sqlConnectionString = _configuration["ConnectionStrings:DevConnection"];
+
+            DatabaseService dbHelper = new DatabaseService(sqlConnectionString);
 
             string query = $@"SELECT format(A.[CreateTime], 'MM/dd/yyyy')
                                     ,B.[StoreName]
@@ -86,7 +90,7 @@ namespace InventoryManagement.Services
             summarySales += "]}";
 
             string result = await GetAnswerAsync(summarySales, "You are helping retailers summarize daily performace");
-
+                      
             return "";
         }
     }
