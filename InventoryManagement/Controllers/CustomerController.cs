@@ -22,9 +22,9 @@ namespace InventoryManagement.Controllers
         public async Task<IActionResult> Index()
         {
 
-            Response.Cookies.Append("UserTodo", "~/Pictures/Sales.PNG", new CookieOptions
+            Response.Cookies.Append("UserTodo", "~InventoryManagement\\InventoryManagement\\wwwroot\\Pictures\\Customers.png", new CookieOptions
             {
-                Expires = DateTime.UtcNow.AddDays(7), // Cookie expiry time
+                Expires = DateTime.UtcNow.AddHours(1), // Cookie expiry time
                 HttpOnly = false, // Allow JavaScript to access the cookie
                 SameSite = SameSiteMode.Strict
             });

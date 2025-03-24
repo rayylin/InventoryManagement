@@ -31,6 +31,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="Index">Inventory</a>
                         </li>
+                        <li>
+                            <img id="userTodo" src="~/Pictures/Notodo.PNG" alt="Todo" class="LogoR">
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Transaction" asp-action="Index">Inventory-Orders</a>
                         </li>
@@ -55,9 +58,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="SalesPerformanceMonthly" asp-action="Index">Sales-Performance-Monthly</a>
                         </li>
-                        <li>
-                            <img id="userTodo" src="~/Pictures/JB.PNG" alt="logo" class="LogoR">
-                        </li>
+
 
                     </ul>
                 </div>
@@ -76,13 +77,19 @@
         // Function to get a cookie by name
         function getCookie(name) {
             let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            console.log(match);
             return match ? match[2] : null;
         }
 
         // Get the logo source from the "UserLogo" cookie
         let userLogo = getCookie("UserTodo");
-        if (userLogo) {
-            document.getElementById("userTodo").src = userLogo;
+        let imgElement = document.getElementById("userTodo");
+
+        if (!userLogo) {
+            // document.getElementById("userTodo").style.visibility = "hidden";
+            imgElement.src = "@Url.Content("~/Pictures/Notodo.PNG")"; 
+        } else {
+            imgElement.src = "@Url.Content("~/Pictures/exc.PNG")"; 
         }
     </script>
 
