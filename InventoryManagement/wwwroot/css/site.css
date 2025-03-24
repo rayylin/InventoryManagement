@@ -22,10 +22,17 @@ body {
 }
 
 .logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+.LogoR {
     width: 25px;
     height: 25px;
-    object-fit: contain; 
+    object-fit: contain;
+    margin-left: auto;
 }
+
 
 .image-grid {
     display: grid;

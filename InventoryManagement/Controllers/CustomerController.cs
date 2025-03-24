@@ -21,7 +21,16 @@ namespace InventoryManagement.Controllers
         // GET: Customer
         public async Task<IActionResult> Index()
         {
-              return _context.Customer != null ? 
+
+            Response.Cookies.Append("UserTodo", "~/Pictures/Sales.PNG", new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddDays(7), // Cookie expiry time
+                HttpOnly = false, // Allow JavaScript to access the cookie
+                SameSite = SameSiteMode.Strict
+            });
+
+
+            return _context.Customer != null ? 
                           View(await _context.Customer.ToListAsync()) :
                           Problem("Entity set 'TransactionDbContext.Customer'  is null.");
         }

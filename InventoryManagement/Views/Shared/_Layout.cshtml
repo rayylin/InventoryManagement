@@ -55,6 +55,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="SalesPerformanceMonthly" asp-action="Index">Sales-Performance-Monthly</a>
                         </li>
+                        <li>
+                            <img id="userTodo" src="~/Pictures/JB.PNG" alt="logo" class="LogoR">
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -67,6 +71,20 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Function to get a cookie by name
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? match[2] : null;
+        }
+
+        // Get the logo source from the "UserLogo" cookie
+        let userLogo = getCookie("UserTodo");
+        if (userLogo) {
+            document.getElementById("userTodo").src = userLogo;
+        }
+    </script>
 
     <footer class="border-top footer text-muted">
         <div class="container">

@@ -21,6 +21,12 @@ namespace InventoryManagement.Controllers
         // GET: Inventory
         public async Task<IActionResult> Index(string storeId = "", string needReorder = "")
         {
+            Response.Cookies.Append("UserTodo", "", new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddDays(-1) // Expire the cookie in the past
+            });
+
+
             //return _context.Inventory != null ? 
             //            View(await _context.Inventory.ToListAsync()) :
             //            Problem("Entity set 'TransactionDbContext.Inventory'  is null.");
