@@ -105,13 +105,22 @@ namespace InventoryManagement.Controllers
                         .Distinct()
                         .ToListAsync();
 
+            var products = await _context.Products
+                        .Select(p => new { p.ProductId, p.ProductName })
+                        .Distinct()
+                        .ToListAsync();
+
+
+
             ViewBag.Stores = new SelectList(stores, "StoreId", "StoreName");
+
+            ViewBag.Products = new SelectList(products, "ProductId", "ProductName");
 
             ViewBag.StatusList = new List<SelectListItem>
             {
-                new SelectListItem { Value = "Pending", Text = "Pending" },
-                new SelectListItem { Value = "Delivered", Text = "Delivered" },
-                new SelectListItem { Value = "In-Transit", Text = "In-Transit" }
+                new SelectListItem { Value = "P", Text = "Pending" },
+                new SelectListItem { Value = "D", Text = "Delivered" },
+                new SelectListItem { Value = "I", Text = "In-Transit" }
             };
 
 
