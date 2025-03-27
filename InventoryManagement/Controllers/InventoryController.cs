@@ -98,8 +98,16 @@ namespace InventoryManagement.Controllers
         }
 
         // GET: Inventory/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var stores = await _context.Store
+                        .Select(s => new { s.StoreId, s.StoreName })
+                        .Distinct()
+                        .ToListAsync();
+
+            ViewBag.Stores = new SelectList(stores, "StoreId", "StoreName");
+
+
             return View();
         }
 
