@@ -107,6 +107,13 @@ namespace InventoryManagement.Controllers
 
             ViewBag.Stores = new SelectList(stores, "StoreId", "StoreName");
 
+            ViewBag.StatusList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Pending", Text = "Pending" },
+                new SelectListItem { Value = "Delivered", Text = "Delivered" },
+                new SelectListItem { Value = "In-Transit", Text = "In-Transit" }
+            };
+
 
             return View();
         }
