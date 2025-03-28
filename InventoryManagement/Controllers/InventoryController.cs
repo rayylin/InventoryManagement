@@ -123,6 +123,13 @@ namespace InventoryManagement.Controllers
                 new SelectListItem { Value = "I", Text = "In-Transit" }
             };
 
+            ViewBag.StrategyList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Ten", Text = "10-day-avg" },
+                new SelectListItem { Value = "Man", Text = "Manual" },
+                new SelectListItem { Value = "Mth", Text = "monthly avg" }
+            };
+
 
             return View();
         }
