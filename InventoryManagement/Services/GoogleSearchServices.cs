@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Data;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -20,6 +21,12 @@ namespace InventoryManagement.Services
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(searchUrl);
+                
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Source", typeof(string));
+                dt.Columns.Add("Price", typeof(decimal));
+                dt.Columns.Add("Date", typeof(DateTime));
+                
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonResponse = await response.Content.ReadAsStringAsync();
@@ -29,17 +36,19 @@ namespace InventoryManagement.Services
                     {
                         string title = item["title"].ToString();
                         string link = item["link"].ToString();
-                        string snippet = item["snippet"].ToString(); // This may contain the price
+                        string snippet = item["snippet"].ToString(); 
 
                         Console.WriteLine($"Title: {title}");
                         Console.WriteLine($"Link: {link}");
                         Console.WriteLine($"Snippet: {snippet}\n");
 
-                        // Extract price using regex (Optional)
+                        // Extract price using regex
                         string price = ExtractPrice(snippet);
-                        if (!string.IsNullOrEmpty(price))
+                        if (price != "Price not found")
                         {
                             Console.WriteLine($"Extracted Price: {price}\n");
+
+                            dt.Rows.Add(title, price, DateTime.Now);
                         }
                     }
                 }
