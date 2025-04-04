@@ -7,16 +7,22 @@ namespace InventoryManagement.Services
 {
     public class GoogleSearchServices
     {
-        public static string apiKey = "";
-        public static string searchEngineId = "";
-        public static string query = "fairlife Lactose Free Reduced Fat Chocolate Ultra Filtered Milk, 52 fl oz price";
+        private readonly IConfiguration _configuration;
+        public  string _apiKey = "";
+        public  string _searchEngineId = "";
 
-        public static string searchUrl = $"https://www.googleapis.com/customsearch/v1?q={Uri.EscapeDataString(query)}&key={apiKey}&cx={searchEngineId}";
-
+        public GoogleSearchServices(IConfiguration configuration)
+        {            
+            _apiKey = configuration["ConnectionStrings:GoogleApiKey"];
+            _searchEngineId = configuration["ConnectionStrings:SearchEngineId"];
+        }
 
         public async Task<string> googleSearchGetAsync(string question, string prompt = "You are a helpful assistant to get the price of a product from the Internet")
         {
             string ans = "";
+            string query = "fairlife Lactose Free Reduced Fat Chocolate Ultra Filtered Milk, 52 fl oz price";
+            string searchUrl = $"https://www.googleapis.com/customsearch/v1?q={Uri.EscapeDataString(query)}&key={_apiKey}&cx={_searchEngineId}";
+
 
             using (HttpClient client = new HttpClient())
             {
