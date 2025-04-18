@@ -2,10 +2,11 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
 using Dapper;
+using InventoryManagement.Interfaces;
 
 namespace InventoryManagement.Services
 {
-    public  class DatabaseService
+    public  class DatabaseService: IDatabaseService
     {
         private readonly string _connectionString;
 

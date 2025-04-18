@@ -35,8 +35,8 @@ builder.Services.AddHangfireServer();
 builder.Services.AddSingleton<DatabaseService>(provider =>
     new DatabaseService(builder.Configuration.GetConnectionString("DevConnection")));
 
-builder.Services.AddSingleton<GoogleSearchServices>(provider =>
-    new GoogleSearchServices(builder.Configuration.GetConnectionString("DevConnection")));
+//builder.Services.AddSingleton<GoogleSearchServices>(provider =>
+//    new GoogleSearchServices(builder.Configuration.GetConnectionString("DevConnection")));
 
 
 builder.Services.AddSignalR();
