@@ -21,13 +21,13 @@ public class DatabaseServiceTests
 
         // Tell the mock to return the fake table when called
         mockService
-            .Setup(service => ConnectDb(It.IsAny<string>()))
+            .Setup(service => service.connectDb(It.IsAny<string>()))
             .Returns(expectedTable);
 
         var databaseService = mockService.Object;
 
         // Act: call the method you're testing
-        var result = ConnectDb("SELECT * FROM Customers");
+        var result = databaseService.connectDb("SELECT *  FROM [InvMgnt].[dbo].[Customer]");
 
         // Assert: verify the result
         Assert.NotNull(result);                      // The result shouldn't be null

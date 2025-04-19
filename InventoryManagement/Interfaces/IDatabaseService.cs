@@ -6,5 +6,7 @@ namespace InventoryManagement.Interfaces
     {
         public void ExecuteStoredProcedure(string query = "");
         public DataTable connectDb(string query);
+
+
     }
 }
