@@ -48,7 +48,7 @@ public class DatabaseServiceTests
 
         // Act & Assert: Make sure it doesn't throw
         var exception = Record.Exception(() =>
-            databaseService.ExecuteStoredProcedure("MyStoredProcedure"));
+            databaseService.ExecuteStoredProcedure("[dbo].[Inventory_OrderToTransit_Update]"));
 
         Assert.Null(exception); // If exception is null, it passed
     }
